@@ -7,7 +7,7 @@ def main (image_id, instance_type, subnet_id, has_public_ip,
     ec2_res = boto3.resource('ec2')
     ec2_client = boto3.client('ec2')
 
-    # Obtener el ID del grupo de seguridad a partir del nombre
+    # Get security group ID by its name
     sg_response = ec2_client.describe_security_groups(
         Filters=[{'Name': 'group-name', 'Values': [security_group_name]}]
     )
@@ -17,7 +17,7 @@ def main (image_id, instance_type, subnet_id, has_public_ip,
 
     sg_id = sg_response['SecurityGroups'][0]['GroupId']
 
-    # Config. Red
+    # Network configuration
     network_interfaces = [{
         'SubnetId': subnet_id,
         'DeviceIndex': 0,
@@ -25,7 +25,7 @@ def main (image_id, instance_type, subnet_id, has_public_ip,
         'Groups': [sg_id]
     }]
 
-    # Creamos la instancia
+    # Create instance
     instances = ec2_res.create_instances(
         ImageId=image_id,
         InstanceType=instance_type,
@@ -36,8 +36,8 @@ def main (image_id, instance_type, subnet_id, has_public_ip,
     )
 
     instance = instances[0]
-    instance.wait_until_running()  # Esperamos a que la instancia tenga estado 'running'
-    instance.reload()  # Actualiza los datos de la instancia
+    instance.wait_until_running()  # Wait for the instance to have 'running' state
+    instance.reload()
 
     print(f"New instance ID: {instance.id}")
     print(f"State: {instance.state['Name']}")

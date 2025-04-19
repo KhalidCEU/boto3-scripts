@@ -7,7 +7,7 @@ def main (tag_key) :
     ec2_res = boto3.resource('ec2')
     ec2 = boto3.client('ec2')
 
-    # Obtenemos reservaciones que tienen instancias con estado 'stopped'
+    # Gets Reservations containing instances with 'stopped' state name
     response = ec2.describe_instances(
         Filters=[
             {
@@ -17,39 +17,38 @@ def main (tag_key) :
         ]
     )
 
-    # Obtenemos lista de instancias
+    # Get the list of instances form the Reservations
     instances = [
         inst
         for reservation in response['Reservations']
         for inst in reservation['Instances']
     ]
 
-    # Creamos un boolean para saber si lanzar o no
     found_tag = False
 
-    print(f'Analizando instancias...')
+    print(f'Checking instances...')
 
     for instance in instances:
         instance_id = instance.get('InstanceId')
         instance = ec2_res.Instance(instance_id)
 
-        # Vemos si alguno de los tags contiene esa clave (tag_KEY)
+        # Check if the instance has any tag with the specified Tag Key
         for tag in instance.tags or []:
             if tag['Key'] == tag_key:
                 found_tag = True
                 break
 
         if found_tag:
-            print(f'La instancia {instance.id} tiene esta etiqueta!')
-            print(f'Lanzando instancia ...')
+            print(f'Found instance {instance.id} with this Tag Key!')
+            print(f'Launching instance ...')
             instance.start()
-            instance.wait_until_running()  # Esperamos a que la instancia tenga estado 'running'
-            print(f'Instancia lanzada !')
+            instance.wait_until_running()
+            print(f'Instance launched !')
             print(f"State: {instance.state['Name']}")
             print()
-            found_tag = False # Restablecemos a false para la proxima iteracion
+            found_tag = False
 
-    print("Todas las instancias con estado 'stopped' han sido analizadas !")
+    print("All stopped instances have been checked !")
     return 0
 
 

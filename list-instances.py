@@ -16,9 +16,9 @@ non_terminated_instances = ec2.describe_instances(
 print("NON-TERMINATED INSTANCES\n")
 for reservations in non_terminated_instances.get('Reservations', []):
     for instance in reservations.get('Instances', []):
-        print(f"Instance id: {instance.get('InstanceId')}")
+        print(f"Instance ID: {instance.get('InstanceId')}")
         print(f"State: {instance.get('State').get('Name')}")
-        #print(f"Image Id: {instance.get('ImageId')}")
+        print(f"Image (AMI) Id: {instance.get('ImageId')}")
         print(f"Subnet Id: {instance.get('SubnetId')}")
         print(f"Key Name: {instance.get('KeyName')}")
 

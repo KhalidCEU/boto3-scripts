@@ -7,9 +7,9 @@ def main (instance_ids) :
     for instance_id in instance_ids:
         instance = ec2_res.Instance(instance_id)
         print(f"Terminating instance {instance_id} ...")
-        instance.terminate()                # Llamada al método para terminaar la instancia
-        instance.wait_until_terminated()    # Esperamos a que la instancia tenga estado 'terminated'
-        instance.reload()                   # Actualiza los datos de la instancia
+        instance.terminate()                # Terminate the instance
+        instance.wait_until_terminated()
+        instance.reload()                   # Update instance data
         print(f"Instance {instance.id} succesfully terminated !")
         print(f"State: {instance.state['Name']}")
         print()

@@ -6,17 +6,17 @@ def main (instance_id, tag_key, tag_value) :
 
     instance = ec2_res.Instance(instance_id)
 
-    # Añadir / actualizar la etiqueta
+    # Add Tag to instance / update tag value if exists alread
     instance.create_tags(Tags=[{'Key': tag_key, 'Value': tag_value}])
 
-    # Obtener ID de la imagen (AMI)
+    # Get Image ID
     image_id = instance.image_id
 
-    # Obtenemos todas las etiquetas de la instancia
-    instance.load()  # Actualizamos los datos (para obtener la nueva etiqueta tambien)
+    # Get all instance tags (including the new one)
+    instance.load()
     tags = instance.tags or []
 
-    print(f"Image (AMI) Id: {image_id}")
+    print(f"Image (AMI) ID: {image_id}")
     print("Associated tags:")
     for tag in tags:
         print(f"  {tag['Key']}: {tag['Value']}")

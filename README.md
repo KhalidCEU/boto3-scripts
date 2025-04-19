@@ -20,6 +20,8 @@ You can then use the scripts like this :
 - **Security group** name
 - **Key** name
 
+**Returns** the **new instance ID** and its **state**
+
 ```
 python3 instance_launcher.py "<image_id> <instance_type> <subnet_id> <has_public_ip> <security_group_name> <key_name>"
 ```
@@ -29,7 +31,16 @@ python3 instance_launcher.py ami-096ccd3d4d0561c2e t2.micro subnet-06f709f8bc1cb
 ```
 
 ### List instances
-**Lists** all your **non-terminated** instances in your default region
+**Lists** all the **following** info about your **non-terminated** instances in your default region :
+
+- Instance **ID**
+- **State** name
+- **Image** (AMI) **ID**
+- **Subnet** ID
+- **Key** name
+- **Security group**(s) name(s)
+- **Private** IP address
+- **Public** IP address (**only** if it has one)
 
 ```
 python3 list-instances.py
@@ -37,7 +48,12 @@ python3 list-instances.py
 
 
 ### List subnets
-**Lists** all the **subnets** instances of your default region
+**Lists** all the **following** info about the **subnets** in your default region
+
+- Subnet **ID**
+- **VPC** ID
+- **CIDR** Block
+- If it automatically **assigns a Public IP** when launching an instance inside the subnet (**yes/no**)
 
 ```
 python3 list-subnets.py
@@ -70,6 +86,8 @@ python3 instance-killer.py i-0c429c8738e9dc459
 
 ### Instance Tagger
 **Assigns** a **tag** to a specific instance (by providing its **instance ID**)
+
+**Returns** the instance **AMI ID** and all its **associated tags**
 
 ```
 python3 instance_tagger.py <instance_id> <tag_key> <tag_value>
