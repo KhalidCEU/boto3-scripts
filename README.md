@@ -2,7 +2,7 @@
 
 ## Setup
 
-> Make sure your <b>~/.aws/config</b> and <b>~/.aws/credentials</b> files are configured correctly.
+> Make sure your <b>`~/.aws/config`</b> and <b>`~/.aws/credentials`</b> files are configured correctly.
 
 First setup a **virtual environment** (recommended) :
 ```
