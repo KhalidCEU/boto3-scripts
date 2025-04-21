@@ -1,7 +1,17 @@
 # AWS Boto3 Scripts
 
 ## Setup
-First **install dependencies** with:
+
+> Make sure your <b>~/.aws/config</b> and <b>~/.aws/credentials</b> files are configured correctly.
+
+First setup a **virtual environment** (recommended) :
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+and **install dependencies** :
+
 ```
 pip install -r requirements.txt
 ```
