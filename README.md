@@ -87,7 +87,7 @@ python3 ressource-counter.py
 **Terminates** the specified instance(s) (by providing its/their **instance ID**('s))
 
 ```
-python3 instance_killer.py <instance1_id> <instance2_id> <instance3_id>..."
+python3 instance_killer.py <instance1_id> <instance2_id> <instance3_id>...
 ```
 **Example**:
 ```
