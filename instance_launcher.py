@@ -26,6 +26,7 @@ def main (image_id, instance_type, subnet_id, has_public_ip,
     }]
 
     # Create instance
+    print('Creating instance ...\n')
     instances = ec2_res.create_instances(
         ImageId=image_id,
         InstanceType=instance_type,
@@ -36,8 +37,8 @@ def main (image_id, instance_type, subnet_id, has_public_ip,
     )
 
     instance = instances[0]
-    instance.wait_until_running()  # Wait for the instance to have 'running' state
-    instance.reload()
+    instance.wait_until_running()   # Wait for the instance to have 'running' state
+    instance.reload()               # Update instance data
 
     print(f"New instance ID: {instance.id}")
     print(f"State: {instance.state['Name']}")
