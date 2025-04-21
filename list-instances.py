@@ -18,8 +18,8 @@ for reservations in non_terminated_instances.get('Reservations', []):
     for instance in reservations.get('Instances', []):
         print(f"Instance ID: {instance.get('InstanceId')}")
         print(f"State: {instance.get('State').get('Name')}")
-        print(f"Image (AMI) Id: {instance.get('ImageId')}")
-        print(f"Subnet Id: {instance.get('SubnetId')}")
+        print(f"Image (AMI) ID: {instance.get('ImageId')}")
+        print(f"Subnet ID: {instance.get('SubnetId')}")
         print(f"Key Name: {instance.get('KeyName')}")
 
         sg_names = [sg['GroupName'] for sg in instance.get('SecurityGroups', [])]
