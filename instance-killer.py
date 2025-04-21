@@ -2,6 +2,8 @@ import sys
 import boto3
 
 def main (instance_ids) :
+    print("INSTANCE KILLER\n")
+
     ec2_res = boto3.resource('ec2')
 
     for instance_id in instance_ids:
